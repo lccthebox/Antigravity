@@ -266,7 +266,32 @@
 
         .hero-text { grid-area: text; text-align: left; }
         .hero-btns { grid-area: btns; display: flex; gap: 12px; justify-content: flex-start; }
-        .hero-images { grid-area: images; }
+        .hero-images { 
+            grid-area: images; 
+            position: relative;
+        }
+
+        .hero-slider {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(2, 1fr);
+            gap: 16px;
+            height: 500px;
+        }
+
+        .hero-slide {
+            border-radius: var(--radius-md);
+            background: #222;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.main {
+            grid-row: span 2;
+            border-radius: var(--radius-lg);
+        }
+
+        .hero-pagination { display: none; }
 
         .hero-badge {
             display: inline-flex;
@@ -1229,49 +1254,58 @@
             }
 
             .hero-text { order: 1; margin-bottom: 32px; text-align: center; }
-            .hero-images { order: 2; width: 100%; margin-bottom: 40px; }
-            .hero-btns { order: 3; width: 100%; margin-top: 0; justify-content: center; }
-
-            .hero h1 { 
-                font-size: clamp(2rem, 8vw, 2.4rem); 
-                line-height: 1.25;
-                margin-bottom: 20px;
-                letter-spacing: -0.03em;
+            .hero-images { 
+                order: 2; 
+                width: 100%; 
+                margin-bottom: 20px; 
+                padding: 0;
             }
 
-            .hero-sub { 
-                font-size: 0.85rem; /* ~40% of title level */
-                color: #555;
-                line-height: 1.8;
-                margin-bottom: 0; 
-                letter-spacing: 0.02em;
-                padding: 0 10px;
+            .hero-slider {
+                display: flex;
+                grid-template-columns: none;
+                grid-template-rows: none;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 15px;
+                height: auto;
+                padding: 0 7.5%; /* Peeking effect */
+                scrollbar-width: none;
+                -ms-overflow-style: none;
             }
 
-            .hero-btns { 
-                flex-direction: column; 
-                gap: 12px;
-                padding: 0 20px;
-            }
+            .hero-slider::-webkit-scrollbar { display: none; }
 
-            .hero-btns .btn { 
-                height: 52px; 
-                width: 100%;
-                border-radius: 12px; 
-                font-size: 0.95rem;
-            }
-
-            .hero-btns .btn-outline {
-                border: 0.5px solid #000;
-                background: transparent;
-            }
-
-            .hero-img-main {
-                width: 92% !important;
-                margin: 0 auto !important;
-                border-radius: 32px !important;
+            .hero-slide {
+                flex: 0 0 85%;
+                scroll-snap-align: center;
                 aspect-ratio: 4 / 3;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+                border-radius: 24px !important;
+                height: auto;
+            }
+
+            .hero-slide.main { grid-row: auto; }
+
+            .hero-pagination {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 16px;
+                margin-bottom: 40px;
+            }
+
+            .hero-pagination .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: rgba(0,0,0,0.1);
+                transition: var(--transition);
+            }
+
+            .hero-pagination .dot.active {
+                background: var(--red);
+                width: 16px;
+                border-radius: 10px;
             }
 
             /* Animations Sequences */
@@ -1439,14 +1473,17 @@
                             </p>
                         </div>
 
-                        <!-- 2. IMAGES -->
+                        <!-- 2. IMAGES (SLIDER ON MOBILE) -->
                         <div class="hero-images fade-up delay-img">
-                            <!-- TODO: Replace with actual hero photo — 권장 크기: 800 × 600px -->
-                            <div class="hero-img-main"></div>
-                            <div class="hero-img-row">
-                                <!-- TODO: Replace with sub photos — 권장 크기: 400 × 400px -->
-                                <div class="hero-img-sub"></div>
-                                <div class="hero-img-sub"></div>
+                            <div class="hero-slider">
+                                <div class="hero-slide main"></div>
+                                <div class="hero-slide sub1"></div>
+                                <div class="hero-slide sub2"></div>
+                            </div>
+                            <div class="hero-pagination">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
                             </div>
                         </div>
 
@@ -1866,6 +1903,21 @@
             const d=document,s=d.createElement("script");s.type="module";
             s.src="https://w.behold.so/widget.js";d.head.append(s);
         })();
+        // ——— Hero Slider Pagination dots ———
+        const heroSlider = document.querySelector('.hero-slider');
+        const heroDots = document.querySelectorAll('.hero-pagination .dot');
+        
+        if (heroSlider && heroDots.length > 0) {
+            heroSlider.addEventListener('scroll', () => {
+                const scrollLeft = heroSlider.scrollLeft;
+                const slideWidth = heroSlider.offsetWidth * 0.85 + 15; // slide width + gap
+                const index = Math.round(scrollLeft / slideWidth);
+                
+                heroDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            });
+        }
     </script>
 
 </body>
