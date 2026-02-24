@@ -91,6 +91,8 @@
         }
         .fade-up.delay-1 { transition-delay: 0.15s; }
         .fade-up.delay-2 { transition-delay: 0.3s; }
+        .fade-up.delay-img { transition-delay: 0.45s; } /* Sequential for mobile & desktop */
+        .fade-up.delay-btn { transition-delay: 0.6s; }
         .fade-up.delay-3 { transition-delay: 0.45s; }
         .fade-up.delay-4 { transition-delay: 0.6s; }
         .fade-up.delay-5 { transition-delay: 0.75s; }
@@ -253,15 +255,18 @@
         .hero-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            grid-template-areas: 
+                "text images"
+                "btns images";
+            gap: 20px 80px;
             align-items: center;
             position: relative;
             z-index: 1;
         }
 
-        .hero-content {
-            text-align: center;
-        }
+        .hero-text { grid-area: text; text-align: left; }
+        .hero-btns { grid-area: btns; display: flex; gap: 12px; justify-content: flex-start; }
+        .hero-images { grid-area: images; }
 
         .hero-badge {
             display: inline-flex;
@@ -1215,10 +1220,17 @@
 
             body { line-height: 1.8; } /* More relaxed reading */
 
-            .hero { 
-                padding: 140px 0 80px; 
+            .hero-inner { 
+                display: flex; 
+                flex-direction: column; 
                 text-align: center;
+                grid-template-areas: none; /* Reset grid */
+                gap: 0;
             }
+
+            .hero-text { order: 1; margin-bottom: 32px; text-align: center; }
+            .hero-images { order: 2; width: 100%; margin-bottom: 40px; }
+            .hero-btns { order: 3; width: 100%; margin-top: 0; justify-content: center; }
 
             .hero h1 { 
                 font-size: clamp(2rem, 8vw, 2.4rem); 
@@ -1227,34 +1239,11 @@
                 letter-spacing: -0.03em;
             }
 
-            .hero h1 em {
-                position: relative;
-                display: inline-block;
-            }
-
-            .hero h1 em::after {
-                content: '';
-                position: absolute;
-                bottom: 5px;
-                left: 0;
-                width: 100%;
-                height: 8px;
-                background: rgba(227,27,35,0.15);
-                z-index: -1;
-                transform: scaleX(0);
-                transform-origin: left;
-                animation: underline-grow 1s forwards 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-            }
-
-            @keyframes underline-grow {
-                to { transform: scaleX(1); }
-            }
-
             .hero-sub { 
-                font-size: 0.9rem; /* 40% of title roughly */
+                font-size: 0.85rem; /* ~40% of title level */
                 color: #555;
                 line-height: 1.8;
-                margin-bottom: 32px;
+                margin-bottom: 0; 
                 letter-spacing: 0.02em;
                 padding: 0 10px;
             }
@@ -1266,8 +1255,9 @@
             }
 
             .hero-btns .btn { 
-                height: 52px; /* 15% reduction */
-                border-radius: 12px; /* Smoother radius */
+                height: 52px; 
+                width: 100%;
+                border-radius: 12px; 
                 font-size: 0.95rem;
             }
 
@@ -1277,12 +1267,17 @@
             }
 
             .hero-img-main {
-                width: 90% !important;
-                margin: 40px auto 0 !important;
+                width: 92% !important;
+                margin: 0 auto !important;
                 border-radius: 32px !important;
                 aspect-ratio: 4 / 3;
                 box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             }
+
+            /* Animations Sequences */
+            .hero-text.fade-up { transition-delay: 0s; }
+            .hero-images.fade-up { transition-delay: 0.15s; }
+            .hero-btns.fade-up { transition-delay: 0.3s; }
 
             .hero-img-row { display: none; } /* Hide sub-rows for cleaner mobile view */
 
@@ -1428,38 +1423,39 @@
             <div class="hero-bg-blur blur-1"></div>
             <div class="hero-bg-blur blur-2"></div>
             <div class="container">
-                <div class="hero-inner">
-                    <!-- LEFT: TEXT -->
-                    <div class="hero-content">
-                        <div class="hero-badge fade-up">대구 최대 원어민 영어회화 커뮤니티</div>
+                    <div class="hero-inner">
+                        <!-- 1. TEXT -->
+                        <div class="hero-text">
+                            <div class="hero-badge fade-up">대구 최대 원어민 영어회화 커뮤니티</div>
 
-                        <h1 class="fade-up delay-1">
-                            더박스에서는<br>
-                            <em>영어가 재밌다</em> 
-                        </h1>
+                            <h1 class="fade-up delay-1">
+                                더박스에서는<br>
+                                <em>영어가 재밌다</em> 
+                            </h1>
 
-                        <p class="hero-sub fade-up delay-2">
-                            영어는 공부가 아니죠, 소통하기 위한 수단입니다.<br>
-                            체계적인 시스템으로 제대로 된 커뮤니티를 경험하세요.
-                        </p>
+                            <p class="hero-sub fade-up delay-2">
+                                영어는 공부가 아니죠, 소통하기 위한 수단입니다.<br>
+                                체계적인 시스템으로 제대로 된 커뮤니티를 경험하세요.
+                            </p>
+                        </div>
 
-                        <div class="hero-btns fade-up delay-3">
+                        <!-- 2. IMAGES -->
+                        <div class="hero-images fade-up delay-img">
+                            <!-- TODO: Replace with actual hero photo — 권장 크기: 800 × 600px -->
+                            <div class="hero-img-main"></div>
+                            <div class="hero-img-row">
+                                <!-- TODO: Replace with sub photos — 권장 크기: 400 × 400px -->
+                                <div class="hero-img-sub"></div>
+                                <div class="hero-img-sub"></div>
+                            </div>
+                        </div>
+
+                        <!-- 3. BUTTONS -->
+                        <div class="hero-btns fade-up delay-btn">
                             <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank" class="btn btn-red">무료 레벨테스트 받기</a>
                             <a href="#why" class="btn btn-outline">더박스 더 알아보기</a>
                         </div>
                     </div>
-
-                    <!-- RIGHT: IMAGES -->
-                    <div class="hero-images fade-up delay-2">
-                        <!-- TODO: Replace with actual hero photo — 권장 크기: 800 × 600px -->
-                        <div class="hero-img-main"></div>
-                        <div class="hero-img-row">
-                            <!-- TODO: Replace with sub photos — 권장 크기: 400 × 400px -->
-                            <div class="hero-img-sub"></div>
-                            <div class="hero-img-sub"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
