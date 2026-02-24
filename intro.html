@@ -561,7 +561,7 @@
         /* Icon removed from HTML, removing CSS dependencies */
 
         @media (max-width: 480px) {
-            .insta-feed-outer-section { padding: 40px 0 !important; }
+            .insta-feed-outer-section { padding: 80px 0 !important; } /* More breathing room */
             .instagram-feed-section, 
             .instagram-feed-section .container { 
                 max-width: 100% !important; 
@@ -569,8 +569,18 @@
                 padding: 0 !important; 
                 margin: 0 !important;
             }
-            .insta-title { font-size: 1.3rem !important; }
-            .insta-subtitle { font-size: 0.85rem !important; padding: 0 20px; }
+            .insta-title { 
+                font-size: clamp(1.3rem, 5vw, 1.5rem) !important; 
+                line-height: 1.4 !important; 
+            }
+            .insta-subtitle { 
+                font-size: 0.85rem !important; 
+                padding: 0 20px; 
+                line-height: 1.6;
+            }
+            behold-widget {
+                margin-top: 15px !important;
+            }
         }
 
         .why-icon {
@@ -957,7 +967,15 @@
         }
 
         @media (max-width: 600px) {
-            .naver-reviews-grid { grid-template-columns: 1fr; }
+            .naver-reviews-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+            .naver-review-card {
+                padding: 20px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Softer shadow */
+                border-radius: 16px; /* More rounded */
+            }
             .naver-review-content { height: auto; -webkit-line-clamp: 5; }
         }
 
@@ -1151,6 +1169,18 @@
             .events-photos { grid-template-columns: repeat(2, 1fr); }
 
             .footer-inner { flex-direction: column; }
+            .quote-content { 
+                font-size: clamp(1.1rem, 4vw, 1.3rem);
+                line-height: 1.7;
+                padding: 0 5px;
+            }
+            .quote-section-inner {
+                padding: 0 15px;
+            }
+            .reviews-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
             .footer-links { flex-wrap: wrap; gap: 20px; }
 
             .stats-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -1188,6 +1218,31 @@
             }
             .event-photo { height: 200px; }
 
+            .why-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+                padding: 0 5px; 
+            }
+            .why-card {
+                padding: 30px 24px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.04); /* Softer shadow */
+                border-radius: 20px;
+                border: 1px solid rgba(0,0,0,0.02);
+            }
+            .section-title { 
+                font-size: clamp(1.6rem, 6vw, 2rem); 
+                line-height: 1.35;
+            }
+            .section-pad { padding: 80px 0; } /* 1.5x padding for air */
+            .btn {
+                padding: 14px 28px;
+                height: 54px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50px; /* More elegant pill shape */
+                font-size: 0.95rem;
+            }
             .fab-group {
                 bottom: 16px;
                 right: 16px;
@@ -1622,7 +1677,7 @@
                 <h2 class="fade-up">지금 바로 시작하세요</h2>
                 <p class="fade-up delay-1">더박스 영어회화 무료 레벨테스트 받기</p>
                 <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank" class="btn btn-white fade-up delay-2">무료로 레벨테스트 받기 →</a>
-                <p class="cta-note fade-up delay-3">
+                <p class="cta-note fade-up delay-3">무료 · 부담 없이 · 지금 바로</p>
             </div>
         </section>
 
