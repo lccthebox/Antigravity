@@ -220,162 +220,240 @@
         }
 
         /* ==============================
-           SECTION 1: HERO
+           SECTION 1: HERO (Mobile-First Redesign)
         ============================== */
         .hero {
-            padding: 168px 0 100px;
-            background: linear-gradient(160deg, #ffffff 60%, #fef2f2 100%);
+            padding: 0;
+            padding-top: 68px; /* nav height — pushes image below fixed header */
+            background: #000;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        /* ─── Hero Image Area ─── */
+        .hero-image-area {
+            position: relative;
+            width: 100%;
+            /* 정사각형에 가까운 비율 (모바일 기준) */
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background-image: url('hero.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-color: #1a1a1a; /* 사진 로드 전 fallback */
+        }
+
+        /* 실제 단체사진 img 태그 삽입 자리 */
+        .hero-image-area .hero-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* 어두운 오버레이 (텍스트 가독성) */
+        .hero-image-area::before {
             content: '';
             position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(227,27,35,0.06) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero-bg-blur {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(227,27,35,0.05) 0%, transparent 70%);
-            filter: blur(60px);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.6;
-        }
-
-        .blur-1 { top: 20%; left: -100px; background: radial-gradient(circle, rgba(138, 43, 226, 0.08) 0%, transparent 70%); }
-        .blur-2 { bottom: 10%; right: -50px; background: radial-gradient(circle, rgba(255, 105, 180, 0.08) 0%, transparent 70%); }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-areas: 
-                "text images"
-                "btns images";
-            gap: 20px 80px;
-            align-items: center;
-            position: relative;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
         }
 
-        .hero-text { grid-area: text; text-align: left; }
-        .hero-btns { grid-area: btns; display: flex; gap: 12px; justify-content: flex-start; }
-        .hero-images { 
-            grid-area: images; 
-            position: relative;
+
+        /* ─── Hero Text Overlay ─── */
+        .hero-overlay-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px 24px 40px;
+            z-index: 2;
+            text-align: left;
         }
 
-        .hero-slider {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: repeat(2, 1fr);
-            gap: 16px;
-            height: 500px;
-        }
-
-        .hero-slide {
-            border-radius: var(--radius-md);
-            background: #222;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-slide.main {
-            grid-row: span 2;
-            border-radius: var(--radius-lg);
-        }
-
-        .hero-pagination { display: none; }
-
-        .hero-badge {
+        .hero-overlay-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            background: rgba(227,27,35,0.08);
-            border: 1px solid rgba(227,27,35,0.2);
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: var(--radius-pill);
-            color: var(--red);
-            font-size: 0.85rem;
-            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.78rem;
+            font-weight: 600;
             letter-spacing: 0.02em;
-            margin-bottom: 28px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
-        .hero-badge::before {
+        .hero-overlay-badge::before {
             content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--red);
+            width: 5px;
+            height: 5px;
+            background: #fff;
             border-radius: 50%;
             flex-shrink: 0;
+            opacity: 0.8;
         }
 
-        .hero h1 {
+        .hero-overlay-title {
             font-family: var(--font-ko);
-            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            font-size: clamp(2rem, 8.5vw, 3rem);
             font-weight: 900;
-            line-height: 1.15;
-            margin-bottom: 24px;
+            line-height: 1.18;
+            color: #ffffff;
             letter-spacing: -0.02em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.4);
         }
 
-        .hero h1 em {
-            font-style: normal;
-            color: var(--red);
+        .hero-overlay-sub {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 500;
+            line-height: 1.6;
+            letter-spacing: 0.01em;
         }
 
-        .hero-sub {
-            font-size: 1.1rem;
-            color: var(--gray-text);
-            margin-bottom: 44px;
-            line-height: 1.7;
+        /* ─── Bounce Arrow ─── */
+        .hero-scroll-arrow {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.5rem;
+            line-height: 1;
+            animation: bounceArrow 1.8s ease-in-out infinite;
+            cursor: pointer;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .hero-btns {
-            display: flex;
-            gap: 12px;
-            flex-wrap: nowrap;
-            justify-content: center;
+        @keyframes bounceArrow {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(8px); }
         }
 
-        /* Hero Images */
-        .hero-images {
+        /* ─── Hero CTA Buttons Area (below image) ─── */
+        .hero-cta-area {
+            background: #fff;
+            padding: 20px 20px 14px;
+        }
+
+        .hero-btn-stack {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .hero-img-main {
-            /* TODO: Replace with actual hero main photo */
-            /* <img src="path/to/main-hero.jpg" alt="더박스 수업 현장"> */
+        .hero-btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            aspect-ratio: 4 / 3;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
+            height: 54px;
+            background: var(--red);
+            color: #fff;
+            font-family: var(--font-ko);
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(227,27,35,0.35);
+            letter-spacing: -0.01em;
         }
 
-        .hero-img-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+        .hero-btn-primary:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(227,27,35,0.45);
         }
 
-        .hero-img-sub {
-            /* TODO: Replace with actual sub photos */
-            aspect-ratio: 1 / 1;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #e0e0e0 0%, #c8c8c8 100%);
+        .hero-btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 54px;
+            background: #fff;
+            color: var(--black);
+            font-family: var(--font-ko);
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 2px solid var(--black);
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: -0.01em;
+        }
+
+        .hero-btn-secondary:hover {
+            background: var(--black);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .hero-cta-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--gray-text);
+            font-weight: 500;
+            margin-top: 10px;
+            letter-spacing: 0.03em;
+        }
+
+        /* ─── Hero Fade-Up Animations ─── */
+        .hero-anim {
+            opacity: 0;
+            transform: translateY(22px);
+        }
+        .hero-anim.hero-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .hero-anim.delay-a1 { transition-delay: 0.1s; }
+        .hero-anim.delay-a2 { transition-delay: 0.28s; }
+        .hero-anim.delay-a3 { transition-delay: 0.46s; }
+        .hero-anim.delay-a4 { transition-delay: 0.6s; } /* buttons */
+
+        /* ─── Desktop override: restore immersive layout for large screens ─── */
+        @media (min-width: 900px) {
+            .hero {
+                display: block;
+            }
+            .hero-image-area {
+                aspect-ratio: unset;
+                height: calc(100vh - 68px); /* full viewport minus nav */
+            }
+            .hero-overlay-text {
+                padding: 48px 64px 80px;
+            }
+            .hero-overlay-title {
+                font-size: clamp(3rem, 5vw, 4.5rem);
+            }
+            .hero-cta-area {
+                padding: 40px 64px;
+            }
+            .hero-btn-stack {
+                flex-direction: row;
+                max-width: 520px;
+            }
+            .hero-btn-primary,
+            .hero-btn-secondary {
+                flex: 1;
+            }
         }
 
         /* ==============================
@@ -1215,13 +1293,7 @@
         @media (max-width: 900px) {
             :root { --section-pad: 80px; }
 
-            .hero-inner {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-
-            .hero { padding: 140px 0 80px; }
-
+            /* 900px: stack layout */
             .section-pad { padding: 80px 0; }
             
             .section-title { 
@@ -1269,79 +1341,18 @@
            RESPONSIVE — 480px (MOBILE)
         ============================== */
         @media (max-width: 480px) {
-            :root { --section-pad: 80px; } /* Increased for air */
+            :root { --section-pad: 80px; }
 
-            body { line-height: 1.8; } /* More relaxed reading */
+            body { line-height: 1.8; }
 
-            .hero-inner { 
-                display: flex; 
-                flex-direction: column; 
-                text-align: center;
-                grid-template-areas: none; /* Reset grid */
-                gap: 0;
+            /* Hero: full-width 1:1 image + buttons below */
+            .hero-image-area {
+                aspect-ratio: 1 / 1;
             }
 
-            .hero-text { order: 1; margin-bottom: 24px; text-align: center; }
-            .hero-images { 
-                order: 2; 
-                width: 100%; 
-                margin-bottom: 12px; 
-                padding: 0;
+            .hero-overlay-title {
+                font-size: clamp(1.9rem, 8.5vw, 2.5rem);
             }
-
-            .hero-slider {
-                display: flex;
-                grid-template-columns: none;
-                grid-template-rows: none;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 15px;
-                height: auto;
-                padding: 0 7.5%; /* Peeking effect: (100-85)/2 */
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .hero-slider::-webkit-scrollbar { display: none; }
-
-            .hero-slide {
-                flex: 0 0 85%;
-                scroll-snap-align: center;
-                aspect-ratio: 4 / 3;
-                border-radius: 24px !important;
-                height: auto;
-            }
-
-            .hero-slide.main { grid-row: auto; }
-
-            .hero-pagination {
-                display: flex;
-                justify-content: center;
-                gap: 8px;
-                margin-top: 16px;
-                margin-bottom: 32px;
-            }
-
-            .hero-pagination .dot {
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: rgba(0,0,0,0.1);
-                transition: var(--transition);
-            }
-
-            .hero-pagination .dot.active {
-                background: var(--red);
-                width: 16px;
-                border-radius: 10px;
-            }
-
-            /* Animations Sequences */
-            .hero-text.fade-up { transition-delay: 0s; }
-            .hero-images.fade-up { transition-delay: 0.15s; }
-            .hero-btns.fade-up { transition-delay: 0.3s; }
-
-            .hero-img-row { display: none; } /* Hide sub-rows for cleaner mobile view */
 
             .section-pad { padding: 80px 0; }
             
@@ -1506,46 +1517,40 @@
              SECTION 1: HERO
         ============================== -->
         <section class="hero" id="hero">
-            <div class="hero-bg-blur blur-1"></div>
-            <div class="hero-bg-blur blur-2"></div>
-            <div class="container">
-                    <div class="hero-inner">
-                        <!-- 1. TEXT -->
-                        <div class="hero-text">
-                            <div class="hero-badge fade-up">대구 최대 원어민 영어회화 커뮤니티</div>
 
-                            <h1 class="fade-up delay-1">
-                                더박스에서는<br>
-                                <em>영어가 재밌다</em> 
-                            </h1>
+            <!-- ① 히어로 이미지 영역 (100vw × 100vw 정사각형) -->
+            <div class="hero-image-area">
 
-                            <p class="hero-sub fade-up delay-2">
-                                영어는 공부가 아니죠, 소통하기 위한 수단입니다.<br>
-                                체계적인 시스템으로 제대로 된 커뮤니티를 경험하세요.
-                            </p>
-                        </div>
+                <!-- 텍스트 오버레이 (사진 위에 올라가는 구조) -->
+                <div class="hero-overlay-text">
+                    <!-- 뱃지 -->
+                    <div class="hero-overlay-badge hero-anim delay-a1">대구 최대 원어민 영어회화 커뮤니티</div>
 
-                        <!-- 2. IMAGES (SLIDER ON MOBILE) -->
-                        <div class="hero-images fade-up delay-img">
-                            <div class="hero-slider">
-                                <div class="hero-slide main"></div>
-                                <div class="hero-slide sub1"></div>
-                                <div class="hero-slide sub2"></div>
-                            </div>
-                            <div class="hero-pagination">
-                                <span class="dot active"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                        </div>
+                    <!-- 메인 카피 -->
+                    <h1 class="hero-overlay-title hero-anim delay-a2">
+                        더박스에서는<br>영어가 재밌다
+                    </h1>
 
-                        <!-- 3. BUTTONS -->
-                        <div class="hero-btns fade-up delay-btn">
-                            <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank" class="btn btn-red">무료 레벨테스트 받기</a>
-                            <a href="#why" class="btn btn-outline">더박스 더 알아보기</a>
-                        </div>
-                    </div>
+                    <!-- 서브 카피 -->
+                    <p class="hero-overlay-sub hero-anim delay-a3">74,184명이 경험한 대구 최고의 영어 커뮤니티</p>
+                </div>
+
+                <!-- 스크롤 유도 화살표 (bounce 애니메이션) -->
+                <div class="hero-scroll-arrow" onclick="document.querySelector('#stats').scrollIntoView({behavior:'smooth'})">↓</div>
             </div>
+
+            <!-- ② 버튼 영역 (사진 바로 아래, 흰색 배경) -->
+            <div class="hero-cta-area">
+                <div class="hero-btn-stack hero-anim delay-a4">
+                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket"
+                       target="_blank"
+                       class="hero-btn-primary">무료 레벨테스트 받기</a>
+                    <a href="#why"
+                       class="hero-btn-secondary">더박스 알아보기</a>
+                </div>
+                <p class="hero-cta-note">무료 · 부담 없음 · 지금 바로</p>
+            </div>
+
         </section>
 
         <!-- ==============================
@@ -1911,8 +1916,14 @@
 
         // ——— Hero stagger on load ———
         window.addEventListener('load', () => {
-            document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
-                setTimeout(() => el.classList.add('visible'), 150 + i * 130);
+            // Trigger hero overlay text animations immediately
+            document.querySelectorAll('.hero-anim').forEach((el) => {
+                // Small rAF to ensure paint before animating
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        el.classList.add('hero-visible');
+                    });
+                });
             });
         });
 
