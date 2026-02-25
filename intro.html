@@ -1228,60 +1228,65 @@
         /* ==============================
            FLOATING BUTTON GROUP
         ============================== */
+        /* Premium Dual FAB Group Styling */
         .fab-group {
             position: fixed;
             bottom: 28px;
-            right: 28px;
+            right: 20px;
             z-index: 2000;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            align-items: flex-end;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .fab-item {
+        .fab-group.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .fab-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
-            border-radius: var(--radius-pill);
-            font-family: var(--font-ko);
-            font-weight: 700;
-            font-size: 0.88rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-            transition: var(--transition);
-            white-space: nowrap;
             text-decoration: none;
-            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
         }
 
-        .fab-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        .fab-circle:hover {
+            transform: scale(1.08);
         }
 
-        /* Phone Styling */
-        .fab-phone {
-            background: #2c3e50; /* Dark Navy/Grey */
-            color: var(--white);
+        .fab-circle svg {
+            width: 24px;
+            height: 24px;
+            display: block;
         }
 
-        /* Kakao Styling */
-        .fab-kakao {
-            background: #FEE500; /* Kakao Yellow */
-            color: #000000;
+        .fab-phone-white {
+            background: #ffffff;
+            border: 1.5px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* Level Test Styling (Default FAB) */
-        .fab-test {
-            background: var(--red);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(227, 27, 35, 0.3);
+        .fab-phone-white:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .fab-test:hover {
-            background: var(--red-dark);
-            box-shadow: 0 8px 25px rgba(227, 27, 35, 0.45);
+        .fab-kakao-yellow {
+            background: #FEE500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .fab-kakao-yellow:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
         }
 
         /* ==============================
@@ -1338,67 +1343,74 @@
            RESPONSIVE — 480px (MOBILE)
         ============================== */
         @media (max-width: 480px) {
-            :root { --section-pad: 80px; }
+            :root { --section-pad: 40px; }
 
-            body { line-height: 1.8; }
-
-            /* Hero: full-width 1:1 image + buttons below */
-            .hero-image-area {
-                aspect-ratio: 1 / 1;
+            body { 
+                line-height: 1.6; 
+                font-size: 0.88rem;
             }
 
-            .hero-overlay-title {
-                font-size: clamp(1.9rem, 8.5vw, 2.5rem);
+            .container {
+                padding: 0 20px;
             }
 
-            .section-pad { padding: 80px 0; }
-            
+            /* Section Headers */
+            .section-eyebrow {
+                font-size: 11px !important;
+                letter-spacing: 0.1em;
+                margin-bottom: 8px;
+            }
+
             .section-title { 
-                font-size: clamp(1.6rem, 7vw, 1.9rem); 
-                line-height: 1.3;
+                font-size: 1.5rem !important; 
+                line-height: 1.25;
                 margin-bottom: 12px;
             }
 
+            .section-sub {
+                font-size: 0.88rem !important;
+                line-height: 1.6;
+                margin-bottom: 40px;
+            }
+
+            /* Cards */
+            .program-card h3, .why-card h3, .review-name, .naver-visitor-name {
+                font-size: 1rem !important;
+            }
+
+            .program-card p, .why-card p, .review-text, .naver-review-content {
+                font-size: 0.88rem !important;
+                line-height: 1.6;
+            }
+
             .why-card, .naver-review-card, .program-card, .review-card {
-                border: none !important;
-                background: #fbfbfb !important;
-                box-shadow: 0 15px 45px rgba(0,0,0,0.02) !important;
-                padding: 30px 24px !important;
-                border-radius: 28px !important;
+                padding: 24px 20px !important;
+                border-radius: 20px !important;
             }
 
-            .review-text, .naver-review-content {
-                font-size: 0.9rem !important;
-                line-height: 1.8 !important;
-            }
-
-            .review-quote {
-                font-size: 2rem !important;
-                opacity: 0.2 !important;
-                margin-bottom: 8px !important;
-            }
-
-            .cta-note {
-                font-weight: 400 !important;
-                color: rgba(255, 255, 255, 0.8) !important;
-                font-size: 1.1rem !important;
-                margin-top: 32px !important;
-            }
-
-            .why-grid, .naver-reviews-grid, .programs-grid, .reviews-grid {
-                gap: 20px !important;
-            }
-
-            /* Full-bleed sections */
-            .insta-feed-outer-section, .events-section {
+            /* Events Section: Full-bleed square grid */
+            .events-section {
                 padding-left: 0 !important;
                 padding-right: 0 !important;
             }
-            .instagram-feed-section .container, .events-photos {
+            .events-section .container {
                 padding: 0 !important;
-                width: 100% !important;
                 max-width: 100% !important;
             }
+            .events-section .fade-up:first-child {
+                padding: 0 20px; /* Header still needs padding */
+            }
+            .events-photos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px !important;
+                margin-top: 32px !important;
+            }
+            .event-photo {
+                aspect-ratio: 1 / 1;
+                border-radius: 0 !important;
+            }
+
+            /* FAB Mobile Adjust: Already handled in .fab-group */
         }
 
         /* Community Photo Section */
@@ -1503,7 +1515,7 @@
         <div class="container">
             <nav class="nav-inner">
                 <a href="#" class="logo">THE <span>BOX</span></a>
-                <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank" class="btn btn-red nav-cta">무료 레벨테스트 받기</a>
+                <a href="https://m.booking.naver.com/booking/6/bizes/350608/items/3410492?area=pll&lang=ko&service-target=map-pc&startDate=2026-02-25&theme=place" target="_blank" rel="noopener noreferrer" class="btn btn-red nav-cta">무료 레벨테스트 받기</a>
             </nav>
         </div>
     </header>
@@ -1530,10 +1542,11 @@
 
                 <!-- 버튼 영역 -->
                 <div class="hero-btns hero-anim delay-a4">
-                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" 
-                       target="_blank" 
+                    <a href="https://m.booking.naver.com/booking/6/bizes/350608/items/3410492?area=pll&lang=ko&service-target=map-pc&startDate=2026-02-25&theme=place" 
+                       target="_blank" rel="noopener noreferrer"
                        class="btn btn-primary">무료 레벨테스트 받기</a>
-                    <a href="#why" 
+                    <a href="https://theboxis.com/" 
+                       target="_blank" rel="noopener noreferrer"
                        class="btn btn-secondary">더박스 알아보기</a>
                 </div>
 
@@ -1669,7 +1682,7 @@
                                 <li>프리토킹이 하고 싶어요</li>
                                 <li>영어 실력을 유지하고 싶어요</li>
                             </ul>
-                            <a href="#" class="program-link">자세히 보기</a>
+                            <a href="https://naver.me/F88gQjHk" target="_blank" rel="noopener noreferrer" class="program-link">자세히 보기</a>
                         </div>
                     </div>
 
@@ -1687,7 +1700,7 @@
                                 <li>말하는 방법을 모르겠어요</li>
                                 <li>더 풍부한 회화를 하고 싶어요</li>
                             </ul>
-                            <a href="#" class="program-link">자세히 보기</a>
+                            <a href="https://naver.me/5BcFp4RM" target="_blank" rel="noopener noreferrer" class="program-link">자세히 보기</a>
                         </div>
                     </div>
                 </div>
@@ -1812,7 +1825,7 @@
                 </div>
 
                 <div class="naver-btn-wrap fade-up delay-3" style="margin-bottom: 40px;">
-                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/review/visitor" target="_blank" class="btn btn-naver">네이버에서 1,000+개 리뷰 전체보기 →</a>
+                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/review/visitor" target="_blank" rel="noopener noreferrer" class="btn btn-naver">네이버에서 1,000+개 리뷰 전체보기 →</a>
                 </div>
             </div>
         </section>
@@ -1863,7 +1876,7 @@
             <div class="container">
                 <h2 class="fade-up">지금 바로 시작하세요</h2>
                 <p class="cta-sub fade-up delay-1">더박스 영어회화 무료 레벨테스트 받기</p>
-                <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank" class="btn btn-white fade-up delay-2">무료로 레벨테스트 받기 →</a>
+                <a href="https://m.booking.naver.com/booking/6/bizes/350608/items/3410492?area=pll&lang=ko&service-target=map-pc&startDate=2026-02-25&theme=place" target="_blank" rel="noopener noreferrer" class="btn btn-white fade-up delay-2">무료로 레벨테스트 받기 →</a>
                 <p class="cta-note fade-up delay-3">당신의 마지막 영어 종착지</p>
             </div>
         </section>
@@ -1885,21 +1898,29 @@
                     </p>
                 </div>
                 <div class="footer-links">
-                    <a href="#">인스타그램</a>
-                    <a href="#">공식 웹사이트</a>
-                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank">무료 레벨테스트</a>
-                    <a href="#">카카오톡 문의</a>
+                    <a href="https://www.instagram.com/thebox_com/" target="_blank" rel="noopener noreferrer">인스타그램</a>
+                    <a href="https://theboxis.com/" target="_blank" rel="noopener noreferrer">공식 웹사이트</a>
+                    <a href="https://m.booking.naver.com/booking/6/bizes/350608/items/3410492?area=pll&lang=ko&service-target=map-pc&startDate=2026-02-25&theme=place" target="_blank" rel="noopener noreferrer">무료 레벨테스트</a>
+                    <a href="http://pf.kakao.com/_lJpxjT/chat" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>
+                    <a href="tel:010-8673-9664">전화 문의</a>
                 </div>
             </div>
             <p class="footer-copy">© 2025 THE BOX. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- FLOATING BUTTON GROUP -->
-    <div class="fab-group">
-        <a href="tel:053-255-0585" class="fab-item fab-phone">전화상담 받기</a>
-        <a href="http://pf.kakao.com/_xnxnxjxj" target="_blank" class="fab-item fab-kakao">카톡상담 받기</a>
-        <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" target="_blank" class="fab-item fab-test">무료 레벨테스트 받기</a>
+    <!-- PREMIUM DUAL FAB GROUP -->
+    <div class="fab-group" id="fabGroup">
+        <a href="tel:010-8673-9664" class="fab-circle fab-phone-white" title="전화 상담">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+        </a>
+        <a href="http://pf.kakao.com/_lJpxjT/chat" target="_blank" rel="noopener noreferrer" class="fab-circle fab-kakao-yellow" title="카카오톡 상담">
+            <svg viewBox="0 0 24 24" fill="#3C1E1E">
+                <path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.667 1.556 5.01 3.938 6.396L4.5 21l4.563-2.7C10.167 18.756 11.07 19 12 19c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/>
+            </svg>
+        </a>
     </div>
 
     <!-- ==============================
@@ -1968,29 +1989,7 @@
         const statsBar = document.querySelector('.stats-bar');
         if (statsBar) statsObserver.observe(statsBar);
 
-        // ——— Scroll Guide Visibility ———
-        const scrollIndicator = document.getElementById('scrollIndicator');
-        window.addEventListener('scroll', () => {
-            if (scrollIndicator) {
-                if (window.scrollY > 100) {
-                    scrollIndicator.style.opacity = '0';
-                    scrollIndicator.style.pointerEvents = 'none';
-                } else {
-                    scrollIndicator.style.opacity = '1';
-                    scrollIndicator.style.pointerEvents = 'auto';
-                }
-            }
-        });
 
-        // ——— Header scroll shadow ———
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
-        });
         // ——— Instagram Feed Script (Behold) ———
         (() => {
             const d=document,s=d.createElement("script");s.type="module";
@@ -2011,6 +2010,44 @@
                 });
             });
         }
+
+        // ——— Unified Scroll Effects ———
+        const fabGroup = document.getElementById('fabGroup');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+
+            // 1. FAB Group Visibility (Show after 100px)
+            if (fabGroup) {
+                if (scrollPos > 100) {
+                    fabGroup.classList.add('show');
+                } else {
+                    fabGroup.classList.remove('show');
+                }
+            }
+
+            // 2. Scroll Indicator (Hero) Visibility
+            if (scrollIndicator) {
+                if (scrollPos > 100) {
+                    scrollIndicator.style.opacity = '0';
+                    scrollIndicator.style.pointerEvents = 'none';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                    scrollIndicator.style.pointerEvents = 'auto';
+                }
+            }
+
+            // 3. Header Shadow
+            if (header) {
+                if (scrollPos > 50) {
+                    header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            }
+        });
     </script>
 
 </body>
