@@ -220,260 +220,155 @@
         }
 
         /* ==============================
-           SECTION 1: HERO (Mobile-First Redesign)
+           SECTION 1: NEW HERO
         ============================== */
         .hero {
-            padding: 0;
-            padding-top: 68px; /* nav height — pushes image below fixed header */
-            background: #000;
+            background: #fff;
+            padding: 80px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
-        /* ─── Hero Image Area ─── */
-        .hero-image-area {
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            background: #fff0f0;
+            color: #E31B23;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-title {
+            margin-top: 20px;
+            font-family: var(--font-ko);
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: #111;
+        }
+
+        .hero-sub {
+            margin-top: 14px;
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .hero-btns {
+            margin-top: 32px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .hero-btns .btn {
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: #E31B23;
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(227,27,35,0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(227,27,35,0.45);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #111;
+            border: 1.5px solid #111;
+        }
+
+        .btn-secondary:hover {
+            background: #111;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .hero-photo-box {
+            margin-top: 48px;
+            width: 100%;
+            max-width: 960px;
             position: relative;
-            width: 100%;
-            /* 정사각형에 가까운 비율 (모바일 기준) */
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            background-image: url('hero.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-color: #1a1a1a; /* 사진 로드 전 fallback */
-        }
-
-        /* 실제 단체사진 img 태그 삽입 자리 */
-        .hero-image-area .hero-photo {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        /* 어두운 오버레이 (텍스트 가독성) */
-        .hero-image-area::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
         }
 
-
-        /* ─── Hero Text Overlay ─── */
-        .hero-overlay-text {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 32px 24px 40px;
-            z-index: 2;
-            text-align: left;
+        .hero-photo-box img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 24px;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .hero-overlay-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: var(--radius-pill);
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            margin-bottom: 14px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        .hero-overlay-badge::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            background: #fff;
-            border-radius: 50%;
-            flex-shrink: 0;
-            opacity: 0.8;
-        }
-
-        .hero-overlay-title {
-            font-family: var(--font-ko);
-            font-size: clamp(2rem, 8.5vw, 3rem);
-            font-weight: 900;
-            line-height: 1.18;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 16px rgba(0,0,0,0.4);
-        }
-
-        .hero-overlay-sub {
-            font-size: 0.88rem;
-            color: rgba(255, 255, 255, 0.75);
-            font-weight: 500;
-            line-height: 1.6;
-            letter-spacing: 0.01em;
-        }
-
-        /* ─── Bounce Arrow ─── */
-        .hero-scroll-arrow {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 1.5rem;
-            line-height: 1;
-            animation: bounceArrow 1.8s ease-in-out infinite;
-            cursor: pointer;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        @keyframes bounceArrow {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50%       { transform: translateX(-50%) translateY(8px); }
-        }
-
-        /* ─── Hero CTA Buttons Area (below image) ─── */
-        .hero-cta-area {
-            background: #fff;
-            padding: 20px 20px 14px;
-        }
-
-        .hero-btn-stack {
+        /* 스크롤 유도 요소 */
+        .hero-scroll-guide {
+            margin: 32px auto 8px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .hero-btn-primary {
-            display: flex;
             align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 54px;
-            background: var(--red);
-            color: #fff;
-            font-family: var(--font-ko);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            border: none;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 6px 20px rgba(227,27,35,0.35);
-            letter-spacing: -0.01em;
-        }
-
-        .hero-btn-primary:hover {
-            background: var(--red-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(227,27,35,0.45);
-        }
-
-        .hero-btn-secondary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 54px;
-            background: #fff;
-            color: var(--black);
-            font-family: var(--font-ko);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            border: 2px solid var(--black);
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            letter-spacing: -0.01em;
-        }
-
-        .hero-btn-secondary:hover {
-            background: var(--black);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .hero-cta-note {
-            text-align: center;
-            font-size: 0.78rem;
-            color: var(--gray-text);
+            gap: 4px;
+            color: #999;
+            font-size: 11px;
             font-weight: 500;
-            margin-top: 10px;
-            letter-spacing: 0.03em;
+            transition: opacity 0.4s ease;
+            z-index: 10;
         }
 
-        /* ─── Hero Fade-Up Animations ─── */
-        .hero-anim {
-            opacity: 0;
-            transform: translateY(22px);
+        .hero-scroll-guide .arrow {
+            font-size: 16px;
+            line-height: 1;
+            animation: bounceScroll 1.5s ease-in-out infinite;
         }
-        .hero-anim.hero-visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
-                        transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .hero-anim.delay-a1 { transition-delay: 0.1s; }
-        .hero-anim.delay-a2 { transition-delay: 0.28s; }
-        .hero-anim.delay-a3 { transition-delay: 0.46s; }
-        .hero-anim.delay-a4 { transition-delay: 0.6s; } /* buttons */
 
-        /* ─── Desktop override: restore immersive layout for large screens ─── */
-        @media (min-width: 900px) {
-            .hero {
-                display: block;
-            }
-            .hero-image-area {
-                aspect-ratio: unset;
-                height: calc(100vh - 68px); /* full viewport minus nav */
-            }
-            .hero-overlay-text {
-                padding: 48px 64px 80px;
-            }
-            .hero-overlay-title {
-                font-size: clamp(3rem, 5vw, 4.5rem);
-            }
-            .hero-cta-area {
-                padding: 40px 64px;
-            }
-            .hero-btn-stack {
-                flex-direction: row;
-                max-width: 520px;
-            }
-            .hero-btn-primary,
-            .hero-btn-secondary {
-                flex: 1;
-            }
+        @keyframes bounceScroll {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
         }
 
         /* ==============================
-           SECTION 2: SOCIAL PROOF BAR
+           SECTION 2: NEW SOCIAL PROOF
         ============================== */
         .stats-bar {
-            background: var(--black);
-            padding: 64px 0;
+            background: #fff;
+            position: relative;
+            z-index: 2;
+            padding: 0 12px 60px;
+            border-top: 1px solid #f0f0f0;
         }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            display: flex;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .stat-item {
+            flex: 1;
+            min-width: 0;
             text-align: center;
-            padding: 0 40px;
+            padding: 24px 8px;
             position: relative;
+            overflow: visible;
         }
 
         .stat-item + .stat-item::before {
@@ -483,31 +378,59 @@
             top: 50%;
             transform: translateY(-50%);
             width: 1px;
-            height: 50%;
-            background: rgba(255,255,255,0.15);
+            height: 40px;
+            background: #eee;
         }
 
         .stat-number {
-            font-family: var(--font-en);
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: var(--font-ko);
+            font-size: clamp(1.4rem, 4.5vw, 3.5rem);
             font-weight: 900;
-            color: var(--white);
+            color: #111;
             line-height: 1;
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
+            white-space: nowrap;
         }
 
-        .stat-number span.unit {
-            font-size: 0.5em;
-            color: var(--red);
+        .stat-number .unit {
+            color: #E31B23;
+            font-size: 0.7em;
+            margin-left: 2px;
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.55);
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: #999;
             font-weight: 500;
-            letter-spacing: 0.05em;
         }
+
+        /* ─── Mobile Adjustments ─── */
+        @media (max-width: 480px) {
+            .hero-btns {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 24px;
+                gap: 10px;
+            }
+            .hero-btns .btn {
+                width: 100%;
+            }
+            .hero-photo-box img {
+                aspect-ratio: 4 / 3;
+            }
+            .stats-bar {
+                padding-bottom: 40px;
+            }
+            .stats-grid {
+                flex-direction: row;
+                gap: 0;
+            }
+            .stat-item {
+                padding: 16px 4px;
+            }
+        }
+
+
 
         /* ==============================
            SECTION 3: WHY THE BOX
@@ -763,12 +686,79 @@
         }
 
         .program-photo {
-            /* TODO: Replace with actual program photo */
-            /* <img src="path/to/program1.jpg" alt="원어민 회화스터디"> */
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: linear-gradient(135deg, #e0e0e0, #c8c8c8);
+            overflow: hidden;
             border-radius: 0;
+        }
+
+        .program-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        /* 커뮤니티 사진 섹션 재디자인 */
+        .community-hero-section {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .community-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('community.jpg');
+            background-size: cover;
+            background-position: center top;
+            filter: grayscale(100%);
+        }
+
+        .community-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .community-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .community-content h2 {
+            font-family: var(--font-en);
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .community-content p {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            .community-hero-section {
+                height: 300px;
+            }
         }
 
         .program-body {
@@ -948,10 +938,17 @@
 
         .events-photos {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 220px);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
             margin-top: 48px;
+        }
+
+        .event-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
         }
 
         /* ==============================
@@ -1517,44 +1514,44 @@
              SECTION 1: HERO
         ============================== -->
         <section class="hero" id="hero">
+            <div class="container">
+                <!-- 뱃지 -->
+                <div class="hero-badge hero-anim delay-a1">대구 최대 원어민 영어회화 커뮤니티</div>
+                
+                <!-- 메인 타이틀 -->
+                <h1 class="hero-title hero-anim delay-a2">
+                    더박스에서는<br>영어가 재밌다
+                </h1>
 
-            <!-- ① 히어로 이미지 영역 (100vw × 100vw 정사각형) -->
-            <div class="hero-image-area">
+                <!-- 서브 텍스트 -->
+                <p class="hero-sub hero-anim delay-a3">
+                    7만명 이상이 경험한 대구 최고의 영어회화 커뮤니티
+                </p>
 
-                <!-- 텍스트 오버레이 (사진 위에 올라가는 구조) -->
-                <div class="hero-overlay-text">
-                    <!-- 뱃지 -->
-                    <div class="hero-overlay-badge hero-anim delay-a1">대구 최대 원어민 영어회화 커뮤니티</div>
-
-                    <!-- 메인 카피 -->
-                    <h1 class="hero-overlay-title hero-anim delay-a2">
-                        더박스에서는<br>영어가 재밌다
-                    </h1>
-
-                    <!-- 서브 카피 -->
-                    <p class="hero-overlay-sub hero-anim delay-a3">74,184명이 경험한 대구 최고의 영어 커뮤니티</p>
+                <!-- 버튼 영역 -->
+                <div class="hero-btns hero-anim delay-a4">
+                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket" 
+                       target="_blank" 
+                       class="btn btn-primary">무료 레벨테스트 받기</a>
+                    <a href="#why" 
+                       class="btn btn-secondary">더박스 알아보기</a>
                 </div>
 
-                <!-- 스크롤 유도 화살표 (bounce 애니메이션) -->
-                <div class="hero-scroll-arrow" onclick="document.querySelector('#stats').scrollIntoView({behavior:'smooth'})">↓</div>
-            </div>
-
-            <!-- ② 버튼 영역 (사진 바로 아래, 흰색 배경) -->
-            <div class="hero-cta-area">
-                <div class="hero-btn-stack hero-anim delay-a4">
-                    <a href="https://map.naver.com/p/entry/place/35708073?placePath=/ticket"
-                       target="_blank"
-                       class="hero-btn-primary">무료 레벨테스트 받기</a>
-                    <a href="#why"
-                       class="hero-btn-secondary">더박스 알아보기</a>
+                <!-- 스크롤 유도 가이드 -->
+                <div class="hero-scroll-guide hero-anim delay-a4" id="scrollIndicator">
+                    <span class="guide-text">스크롤해서 더 알아보기</span>
+                    <span class="arrow">↓</span>
                 </div>
-                <p class="hero-cta-note">무료 · 부담 없음 · 지금 바로</p>
-            </div>
 
+                <!-- 히어로 사진 -->
+                <div class="hero-photo-box hero-anim delay-a2">
+                    <img src="hero.jpg" alt="더박스 원어민 영어회화 커뮤니티">
+                </div>
+            </div>
         </section>
 
         <!-- ==============================
-             SECTION 2: SOCIAL PROOF BAR
+             SECTION 2: SOCIAL PROOF (STATS)
         ============================== -->
         <section class="stats-bar" id="stats">
             <div class="container">
@@ -1575,7 +1572,7 @@
                         <div class="stat-number">
                             <span class="counter" data-target="3500" data-suffix="개+">0</span>
                         </div>
-                        <div class="stat-label">누적 네이버 플레이스 후기</div>
+                        <div class="stat-label">누적 네이버 후기</div>
                     </div>
                 </div>
             </div>
@@ -1635,13 +1632,14 @@
         </section>
 
         <!-- ==============================
-             SECTION 3.5: COMMUNITY PHOTO
+             SECTION 3.5: COMMUNITY PHOTO (Redesigned)
         ============================== -->
-        <section class="community-photo-section">
-            <div class="container">
-                <div class="community-photo-wrap fade-up slow">
-                    <img src="./KakaoTalk_20251108_132154941_16.jpg" alt="The Box Community">
-                </div>
+        <section class="community-hero-section fade-up">
+            <div class="community-bg"></div>
+            <div class="community-overlay"></div>
+            <div class="community-content">
+                <h2>YOUR FIRST & LAST STOP</h2>
+                <p>영어회화의 시작부터 목표하는 마지막 지점까지 더박스에서 끝내세요</p>
             </div>
         </section>
 
@@ -1659,8 +1657,9 @@
                 <div class="programs-grid">
                     <!-- Program 1 -->
                     <div class="program-card fade-up delay-1">
-                        <!-- TODO: Replace with actual English Free-Talking photo — 권장 크기: 800 × 450px -->
-                        <div class="program-photo photo">ENGLISH FREE-TALKING PHOTO</div>
+                        <div class="program-photo">
+                            <img src="study.jpg" alt="English Free-Talking">
+                        </div>
                         <div class="program-body">
                             <span class="program-tag">원어민 회화스터디</span>
                             <h3>English Free-Talking</h3>
@@ -1676,8 +1675,9 @@
 
                     <!-- Program 2 -->
                     <div class="program-card fade-up delay-2">
-                        <!-- TODO: Replace with actual TheBox Academy photo — 권장 크기: 800 × 450px -->
-                        <div class="program-photo photo">THEBOX ACADEMY PHOTO</div>
+                        <div class="program-photo">
+                            <img src="academy.jpg" alt="TheBox Academy">
+                        </div>
                         <div class="program-body">
                             <span class="program-tag">더박스 아카데미</span>
                             <h3>TheBox Academy</h3>
@@ -1840,13 +1840,18 @@
                 </div>
 
                 <div class="events-photos fade-up delay-1">
-                    <!-- TODO: Replace each div with <img src="..." alt="더박스 파티/이벤트"> — 권장 크기: 760 × 440px -->
-                    <div class="event-photo"></div>
-                    <div class="event-photo"></div>
-                    <div class="event-photo"></div>
-                    <div class="event-photo"></div>
-                    <div class="event-photo"></div>
-                    <div class="event-photo"></div>
+                    <div class="event-photo">
+                        <img src="community1.jpg" alt="더박스 파티/이벤트 1">
+                    </div>
+                    <div class="event-photo">
+                        <img src="community2.jpg" alt="더박스 파티/이벤트 2">
+                    </div>
+                    <div class="event-photo">
+                        <img src="community3.jpg" alt="더박스 파티/이벤트 3">
+                    </div>
+                    <div class="event-photo">
+                        <img src="community4.jpg" alt="더박스 파티/이벤트 4">
+                    </div>
                 </div>
             </div>
         </section>
@@ -1943,10 +1948,10 @@
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
-                    el.textContent = target.toLocaleString('ko-KR') + suffix;
+                    el.innerHTML = target.toLocaleString('ko-KR') + `<span class="unit">${suffix}</span>`;
                     clearInterval(timer);
                 } else {
-                    el.textContent = Math.floor(current).toLocaleString('ko-KR') + suffix;
+                    el.innerHTML = Math.floor(current).toLocaleString('ko-KR') + `<span class="unit">${suffix}</span>`;
                 }
             }, stepTime);
         }
@@ -1962,6 +1967,20 @@
 
         const statsBar = document.querySelector('.stats-bar');
         if (statsBar) statsObserver.observe(statsBar);
+
+        // ——— Scroll Guide Visibility ———
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        window.addEventListener('scroll', () => {
+            if (scrollIndicator) {
+                if (window.scrollY > 100) {
+                    scrollIndicator.style.opacity = '0';
+                    scrollIndicator.style.pointerEvents = 'none';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                    scrollIndicator.style.pointerEvents = 'auto';
+                }
+            }
+        });
 
         // ——— Header scroll shadow ———
         window.addEventListener('scroll', () => {
