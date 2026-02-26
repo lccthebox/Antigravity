@@ -289,6 +289,48 @@
             box-shadow: 0 8px 25px rgba(227,27,35,0.45);
         }
 
+        .hero-sub-btns {
+            margin-top: 14px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-sub-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--black);
+            border: 1.5px solid rgba(0,0,0,0.15);
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .hero-sub-btn:hover {
+            border-color: var(--red);
+            color: var(--red);
+            background: rgba(232,25,44,0.05);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            .hero-sub-btns {
+                flex-direction: column;
+                padding: 0 24px;
+                gap: 8px;
+            }
+            .hero-sub-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         .btn-secondary {
             background: #fff;
             color: #111;
@@ -1545,9 +1587,14 @@
                     <a href="https://m.booking.naver.com/booking/6/bizes/350608/items/3410492?area=pll&lang=ko&service-target=map-pc&startDate=2026-02-25&theme=place" 
                        target="_blank" rel="noopener noreferrer"
                        class="btn btn-primary">무료 레벨테스트 받기</a>
+                </div>
+                <div class="hero-sub-btns hero-anim delay-a4">
+                    <a href="https://lccthebox.github.io/Antigravity/academy.html"
+                       target="_blank" rel="noopener noreferrer"
+                       class="hero-sub-btn">더박스 아카데미 알아보기 →</a>
                     <a href="https://theboxis.com/" 
                        target="_blank" rel="noopener noreferrer"
-                       class="btn btn-secondary">더박스 알아보기</a>
+                       class="hero-sub-btn">공식 웹페이지 →</a>
                 </div>
 
                 <!-- 스크롤 유도 가이드 -->
