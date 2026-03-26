@@ -45,8 +45,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--white);color:var(--i
 .copy-pill:hover{background:#DDDDE0}
 
 /* ── MAP ── */
-.map-frame{margin:16px 20px 0;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#e8e8e8;height:240px}
-.map-frame iframe{width:100%;height:240px;border:none;display:block}
+.map-static-wrap{display:block;margin:16px 20px 0;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#e8e8e8;height:200px;position:relative;text-decoration:none}
+.map-static-img{width:100%;height:200px;object-fit:cover;display:block}
+.map-open-pill{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.52);color:white;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:.3px}
 
 /* ── NAV BTNS ── */
 .nav-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 20px 20px}
@@ -205,12 +206,19 @@ footer strong{color:#AEAEB2}
       </div>
 
       <!-- 카카오맵: 대구광역시 중구 동성로 2 고정 표시 -->
-      <div class="map-frame">
-        <iframe
-          src="https://map.kakao.com/link/map/27376260/embed"
-          allowfullscreen loading="lazy" title="더박스 어학원 위치">
-        </iframe>
-      </div>
+      <a href="https://map.kakao.com/?q=%EB%8D%94%EB%B0%95%EC%8A%A4+%EC%96%B4%ED%95%99%EC%9B%90" target="_blank" class="map-static-wrap">
+        <img
+          class="map-static-img"
+          src="https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?w=640&h=400&center=128.5940,35.8672&level=16&markers=type:d|size:mid|pos:128.5940%2035.8672|label:더박스"
+          alt="더박스 어학원 지도"
+          onerror="this.style.display='none';document.getElementById('map-fallback').style.display='flex'"
+        />
+        <div id="map-fallback" style="display:none;width:100%;height:200px;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#F5F5F7">
+          <div style="font-size:28px">🗺️</div>
+          <div style="font-size:13px;color:#8E8E93;font-weight:600">지도를 탭하면 카카오맵으로 열립니다</div>
+        </div>
+        <div class="map-open-pill">지도 앱으로 열기 →</div>
+      </a>
 
       <div class="nav-row">
         <a class="nav-btn btn-naver" href="https://map.naver.com/p/directions/-/3AntcH,2zCKkg,%EB%8D%94%EB%B0%95%EC%8A%A4%EC%96%B4%ED%95%99%EC%9B%90%20%EB%8C%80%EA%B5%AC%EB%B3%B8%EC%A0%90,1742045734,PLACE_POI/-/transit?c=15.00,0,0,0,dh" target="_blank">
